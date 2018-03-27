@@ -1,0 +1,26 @@
+---
+directory:
+  library: library
+  content: content
+  static: static
+  external: external
+  output: docroot
+external:
+  sharedSass:
+    git: github.com/org/sharedSass
+build:
+  file:
+    pre:
+      lint: linterTool
+    post:
+      diff: diff file
+  project:
+    pre:
+      clean: rm -rf docroot/*
+    post:
+      reactbuild: npm react build docroot/*
+      sassbuild: npm sass build docroot/*
+environment:
+  key: value
+  nested:
+    key: value2
