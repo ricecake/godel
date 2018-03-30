@@ -2,9 +2,10 @@
 directory:
   library: library
   content: content
-  static: static
   external: external
   output: docroot
+  static:
+    - static
 external:
   sharedSass:
     git: github.com/org/sharedSass

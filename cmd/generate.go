@@ -89,10 +89,13 @@ static directory into the output dir.`,
 			}
 		}
 
-		copyErr := copy.Copy(viper.GetString("directory.static"), filepath.Join(viper.GetString("directory.output"), viper.GetString("directory.static")))
-		if copyErr != nil {
-			fmt.Printf("Got Error: %+v\n", copyErr.Error())
-			os.Exit(1)
+		outputDir := viper.GetString("directory.output")
+		for _, staticDir := range viper.GetStringSlice("directory.static") {
+			copyErr := copy.Copy(staticDir, filepath.Join(outputDir, staticDir))
+			if copyErr != nil {
+				fmt.Printf("Got Error: %+v\n", copyErr.Error())
+				os.Exit(1)
+			}
 		}
 	},
 }
